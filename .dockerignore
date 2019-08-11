@@ -1,0 +1,13 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/env
+
+# Python files
+*.pyc
+__pycache__
+
+# Apple files
+.DS_Store
