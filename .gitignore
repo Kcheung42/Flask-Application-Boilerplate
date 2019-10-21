@@ -6,7 +6,7 @@ venv/
 ENV/env
 
 # Python files
-*.pyc
+.pyc
 __pycache__
 
 # Apple files

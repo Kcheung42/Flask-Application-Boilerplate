@@ -1,12 +1,30 @@
 version: '3'
 
 services:
-  flask:
-    container_name: flask_server
+  app:
+    container_name: app
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ./services/app
+      dockerfile: Dockerfile
     volumes:
-      - ./app:/app
+      - './services/app:/usr/src/app'
     ports:
-      - "5000:5000"
+      - 5000:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:password@app-db:5432/app_dev
+      - DATABASE_TEST_URL=postgres://postgres:password@app-db:5432/app_test
+    depends_on:
+      - app-db
+
+  app-db:
+    build:
+      context: ./services/app/project/db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
