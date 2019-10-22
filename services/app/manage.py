@@ -6,11 +6,6 @@ import unittest
 app = create_app()
 
 cli = FlaskGroup(create_app=create_app)
-# Now you can work with the app and db directly
-# docker-compose exec app flask shell
-# >>> app
-# >>> db
-
 
 @cli.command('recreate_db')
 def recreate_db():
